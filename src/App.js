@@ -31,6 +31,11 @@ function App() {
     );
   };
 
+  const onSendAppointment=(myAppointment)=>{
+    console.log(myAppointment);
+    setAppointmentList([...appointmentList,myAppointment])
+  }
+
   const filterAppointments = appointmentList
     .filter((item) => {
       return (
@@ -52,7 +57,9 @@ function App() {
         <BiArchive className="inline-block text-red-400 align-top" />
         Your Appointments
       </h1>
-      <AddAppointment />
+      <AddAppointment
+      lastId={appointmentList.reduce((max,item)=>Number(item.id) > max ? Number(item.id) : max,0)}
+      onSendAppointment={onSendAppointment} />
       <Search query={query}
        onQueryChange={(myQuery) => setQuery(myQuery)}
        orderBy={orderBy}
